@@ -1,6 +1,13 @@
 import sqlite3
+import pathlib
+import sys
+from App.config import db_path
 
-connection =sqlite3.connect("messenger.db")
+project_root = pathlib.Path(__file__).resolve().parent
+sys.path.append(str(project_root))
+
+#   Connect to the absolute path
+connection = sqlite3.connect(db_path)
 cursor = connection.cursor()
 
 #   TABLE FOR USERS:
@@ -27,7 +34,7 @@ CREATE TABLE IF NOT EXISTS messages (
 )
 ''')
 
-print("The database and tables were successfully created.")
+print(f"Database created successfully at: {db_path}")
 
 #   SAVING THE CHANGES:
 connection.commit()

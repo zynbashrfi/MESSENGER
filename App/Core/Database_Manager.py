@@ -1,10 +1,11 @@
 import sqlite3
 import bcrypt
+from App.config import db_path
 
 class DatabaseManager:
-    def __init__(self, db_name="messenger.db"):
-#       method to connect to the db
-        self.connection = sqlite3.connect(db_name)
+    def __init__(self):
+#       method to connect to the database
+        self.connection = sqlite3.connect(db_path)
         self.cursor = self.connection.cursor()
 
     def hash_password(self, plain_password):
