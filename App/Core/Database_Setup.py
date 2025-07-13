@@ -1,12 +1,13 @@
 import sqlite3
 import pathlib
 import sys
+
 from App.config import db_path
 
 project_root = pathlib.Path(__file__).resolve().parent
 sys.path.append(str(project_root))
 
-#   Connect to the absolute path
+#   Connect to the path of database:
 connection = sqlite3.connect(db_path)
 cursor = connection.cursor()
 
@@ -22,6 +23,17 @@ CREATE TABLE IF NOT EXISTS users (
 ''')
 
 #   TABLE FOR CONTACTS:
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS contacts (
+    user_id INTEGER NOT NULL,
+    contact_id INTEGER NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(id),
+    FOREIGN KEY(contact_id) REFERENCES users(id),
+    PRIMARY KEY(user_id, contact_id)
+)
+''')
+
+#   TABLE FOR MESSAGES
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS messages (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
