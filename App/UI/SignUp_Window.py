@@ -94,6 +94,7 @@ class SignupWindow(QWidget):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = SignupWindow()
+    db_manager = DatabaseManager()
+    window = SignupWindow(db_manager)
     window.show()
     sys.exit(app.exec())

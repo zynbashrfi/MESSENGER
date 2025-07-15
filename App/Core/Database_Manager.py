@@ -104,7 +104,7 @@ class DatabaseManager:
     def get_user_profile(self, user_id):
     #   fetches a user's username and phone number by their id:
         try:
-            self.cursor.execute("SELECT username, phone_number FROM users WHERE id = ?")
+            self.cursor.execute("SELECT username, phone_number FROM users WHERE id = ?", (user_id,))
             return self.cursor.fetchone()
         except sqlite3.Error:
             return None
